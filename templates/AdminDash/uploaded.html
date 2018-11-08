@@ -1,0 +1,86 @@
+{% extends "AdminDash/AdminDashboard.html" %}
+
+{% load static %}
+
+{% block maincontent %}
+<div class="content">
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-xs-2 col-sm-2"></div>
+    <div class="col-xs-8 col-sm-8">
+      <div class="card">
+        <div class="card-header text-center" style="font-size: 22px;"><strong>Upload Form</strong></div>
+        
+         <div class="alert alert-danger" id="dataAlert" style="display:none;">
+         <div id="msgdataAlert"></div>
+        </div>
+
+        <form id="uploaded_form" method="post">
+          <div class="card-body card-block">         
+
+            <div class="row">
+              <div class="col-sm-6 form-group">
+                <label>TranDate:</label>
+                <div id="datepicker"  class="input-group date" data-date-format="mm-dd-yyyy">
+                  <input type="text" class="form-control" name="upl_TranDate" id="upl_TranDate" readonly/>
+                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                </div>
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="" class="form-control-label">RefTran1</label>
+                <input type="text" name="upl_RefTran1" id="upl_RefTran1" placeholder="" class="form-control">
+              </div>
+            </div><br/>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label for="" class="form-control-label">RefTran2</label>
+                <input type="text" name="upl_RefTran2" id="upl_RefTran2" placeholder="" class="form-control">
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="" class="form-control-label">RefTran3</label>
+                <input type="text" name="upl_RefTran3" id="upl_RefTran3" placeholder="" class="form-control">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label for="" class="form-control-label">RefTran4</label>
+                <input type="text" name="upl_RefTran4" id="upl_RefTran4" placeholder="" class="form-control">
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="" class="form-control-label">Amount</label>
+                <input type="number" name="upl_Amount" id="upl_Amount" placeholder="" class="form-control">
+              </div>
+            </div><br/>
+
+            <div class="form-group">
+              <label> Checked &nbsp; &nbsp;</label>
+                <input type="checkbox" name="cen_status" id="cen_status" value="1"> &nbsp;True &nbsp; &nbsp; 
+                <input type="checkbox" name="cen_status" id="cen_status" value="0"> &nbsp;False
+            </div>
+
+            <button  type="submit" id="submit"  class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div><!-- card end -->
+    </div>
+    <div class="col-xs-2 col-sm-2"></div>
+  </div><!-- row end -->
+
+</div><!-- animated end -->
+</div><!-- Content end -->
+<div class="clearfix"></div>
+{% endblock maincontent %}
+
+
+{% block extra_js %}
+<script type="text/javascript" src="../static/dashCss/staticPagesJs/datepicker.js">
+</script>
+<script type="text/javascript" src="../static/dashCss/staticPagesJs/uploaded.js">
+</script>
+{% endblock %}
+
+{% block extra_css %}
+
+{% endblock %}

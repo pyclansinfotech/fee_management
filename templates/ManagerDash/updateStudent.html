@@ -1,0 +1,335 @@
+{% extends "ManagerDash/ManagerDashboard.html" %}
+{% load static %}
+
+{% block detail %}
+<!--  Traffic  -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">  
+           
+            <div class="row" style="margin-top: 30px;"> 
+                <div class="col-lg-3">
+                	<h4 class="text-center"><strong>Register Student List</strong></h4>
+                    <div class="card-body">
+	                    <div class="card-content">
+	                    	<table id="studentUpdateTable" class="table table-striped table-bordered" style="width:100%">
+						        <thead>
+						        	<tr>
+						                <th class="text-center "> <b>Name</b></th>  
+						            </tr>
+						        </thead>
+						        <tbody>
+						            {% for data in studentName %}
+						            <tr>	
+						            	<th><a  data-id="{{ data.id }}" href="/studentUpdateData/{{data.id}}/"> {{ data.first_name }} </a></th> 
+
+						            </tr>
+						            {% endfor %}   
+						        </tbody>
+							</table>
+	                    </div>
+                    </div> <!-- /.card-body -->
+                </div>
+
+                <div class="col-lg-6">
+                	<h4 class="text-center"><strong>Register Student Detail</strong></h4>	
+                	<div class="card">
+                		<div class="card-body"> 
+	                       
+		                    <!-- <div class="card-content"> -->
+				   		<div class="alert alert-danger" id="dataAlert" style="display:none;">
+					            <div id="msgdataAlert"></div>
+					    </div>					
+						
+						{% if studentData is not defined %}
+							{% for data in studentData %}
+							<form id="updateStudentData" method="post">
+									<input type="hidden" id="studentid" name="studentid"  value="{{data.id}}" >	
+						              <div class="row">
+						                <div class="col-md-6 form-group">
+						                  <label for="" class="form-control-label">First Name</label>
+						                  <input type="text" name="stu_first_name" id="stu_first_name" value="{{ data.first_name }}" class="form-control">
+						                </div>
+						                <div class="col-md-6 form-group">
+						                  <label for="" class="form-control-label">Second Name</label>
+						                  <input type="text" value="{{ data.second_name }}" name="stu_second_name" id="stu_second_name" placeholder="" class="form-control">
+						                </div>
+						              </div>
+
+						              <div class="row">
+						                <div class="col-md-6 form-group">
+						                  <label for="" class="form-control-label">Level</label>
+						                  <input type="number"  value="{{data.idLevel}}" name="stu_idLevel" id="stu_idLevel" placeholder="" class="form-control">
+						                </div>
+						                
+						                <div class="col-md-6 form-group">
+						                  <label for="" class="form-control-label">Status</label>
+						                  <input type="number" name="stu_status" id="stu_status" value="{{data.status}}" class="form-control">
+						                </div>
+						              </div>
+
+						              <div class="row">
+						                <div class="col-md-6 form-group">
+						                  <label for="" class="form-control-label">Level Certified</label>
+						                  <input type="number" name="stu_idlevel_certified" id="stu_idlevel_certified" value="{{data.idlevel_certified}}" class="form-control">
+						                </div>
+						                <div class="col-md-6 form-group">
+						                  <label for="" class="form-control-label">Level Classes Done
+						                  </label>
+						                  <input type="number" name="stu_level_classes_done" id="stu_level_classes_done" value="{{data.level_classes_done }}" class="form-control">
+						                </div>
+						              </div>
+						              <div class="row">
+						                <div class="col-md-6 form-group">
+						                  <label for="" class="form-control-label">Phone 1</label>
+						                  <input type="number" name="stu_phone1" id="stu_phone1" placeholder="" value="{{ data.phone1 }}" class="form-control">
+						                </div>
+						                <div class="col-md-6 form-group">
+						                  <label for=""  class="form-control-label">Phone 2</label>
+						                  <input type="number" name="stu_phone2" id="stu_phone2" placeholder="" value="{{ data.phone2 }}" class="form-control">
+						                </div>
+						                
+						              </div>
+
+						              <div class="row">
+						                <div class="col-md-6 form-group">
+						                  <label for="" class="form-control-label">PostCode</label>
+						                  <input type="text" name="stu_postcode" id="stu_postcode" placeholder="" value="{{ data.postcode }}" class="form-control">
+						                </div>
+						                <div class="col-md-6 form-group">
+						                  <label for="" class="form-control-label">Email</label>
+						                  <input type="email" name="stu_email" id="stu_email" placeholder="" value="{{ data.email }}" class="form-control">
+						                </div>
+						                
+						              </div><br/>
+						             <div class="row">
+						                <div class="col-md-12 form-group">
+						                  <label for="" class="form-control-label">Address 1</label>
+						                  <textarea name="stu_address1" id="stu_address1" rows="2"  class="form-control">{{data.address1}} </textarea>
+						                </div>
+						            </div>
+						             <div class="row">
+						                <div class="col-md-12 form-group">
+						                  <label for="" class="form-control-label">Address 2</label>
+						                  <textarea name="stu_address2" id="stu_address2" rows="2"  class="form-control">{{data.address2}}</textarea>
+						                </div>
+						            </div>	
+						            <button type="submit" id="studentUpdateBtn" class="btn btn-primary">Update</button>
+						            </form>
+								<!-- </div> -->
+
+						    {% endfor %}
+
+							{% else %}
+							<div class="row">
+								<div class="col-md-12">
+									<h5 style="color: red">
+									   <i class="fa fa-hand-o-left"></i> Select student name from student list to update student data.
+									</h5>
+								</div>
+								
+							</div>
+						    
+						    {% endif %}	
+		               
+	                	</div> <!--card body -->
+                    </div><!-- card end -->
+
+                    <!-- /////////////////////////////////////////// -->
+
+                    <!-- Button to Open the Modal -->
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalStudent" style="margin-bottom: 25px;">New</button>
+
+					<!-- The Modal -->
+					<div class="modal" id="myModalStudent">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+
+					      <!-- Modal Header -->
+					      <div class="modal-header" style="background-color: #5ba7fa;color:#fff;">
+					        <h4 class="modal-title"><strong>Student Registration</strong></h4>
+					        <button type="button" class="close" data-dismiss="modal">&times;</button>
+					      </div>
+
+					      <!-- Modal body -->
+					      <div class="modal-body">
+					       <form id="student_form" method="post">
+				              <div class="alert alert-danger" id="dataAlert" style="display:none;">
+				                <div id="msgdataAlert"></div>
+				              </div>
+				              <div class="row">
+				                <div class="col-md-6 form-group">
+				                  <label for="" class="form-control-label">First Name</label>
+				                  <input type="text" name="stu_first_name" id="stu_first_name" placeholder="" class="form-control">
+				                </div>
+				                <div class="col-md-6 form-group">
+				                  <label for="" class="form-control-label">Second Name</label>
+				                  <input type="text" name="stu_second_name" id="stu_second_name" placeholder="" class="form-control">
+				                </div>
+				              </div>
+
+				              <div class="row">
+				                <div class="col-md-4 form-group">
+				                  <label for="" class="form-control-label">Level</label>
+				                  <input type="number" name="stu_idLevel" id="stu_idLevel" placeholder="" class="form-control">
+				                </div>
+				                <div class="col-md-4 form-group">
+				                  <label for="" class="form-control-label">CI</label>
+				                  <input type="number" name="stu_idci" id="stu_idci" placeholder="" class="form-control">
+				                </div>
+				                <div class="col-md-4 form-group">
+				                  <label for="" class="form-control-label">Status</label>
+				                  <input type="number" name="stu_status" id="stu_status" placeholder="" class="form-control">
+				                </div>
+				              </div>
+
+				              <div class="row">
+				                <div class="col-md-6 form-group">
+				                  <label for="" class="form-control-label">Level Certified</label>
+				                  <input type="number" name="stu_idlevel_certified" id="stu_idlevel_certified" placeholder="" class="form-control">
+				                </div>
+				                <div class="col-md-6 form-group">
+				                  <label for="" class="form-control-label">Level Classes Done
+				                  </label>
+				                  <input type="number" name="stu_level_classes_done" id="stu_level_classes_done" placeholder="" class="form-control">
+				                </div>
+				              </div>
+				            
+				              <div class="row">
+				                <div class="col-md-4 form-group">
+				                  <label>School Type</label>
+				                    <select name="stu_school_type" class="form-control" tabindex="1">
+				                      <option value="">Choose a type</option>
+				                      <option value="Private School">Private School</option>
+				                      <option value="Govt School">State School(Govt)</option>
+				                    </select>
+				                </div>
+				                <div class="col-md-4 form-group">
+				                  <label>Special Need</label>
+				                    <select name="stu_special_need" class="form-control" tabindex="1">
+				                      <option value="">Choose a type</option>
+				                      <option value="1">Yes</option>
+				                      <option value="0">No</option>
+				                    </select>
+				                </div>
+				                <div class="col-md-4 form-group">
+				                  <label for="" class="form-control-label readonly" >Special Need Note
+				                  </label>
+				                  <input type="text" name="stu_special_need_note" id="stu_special_need_note" placeholder="" class="form-control">
+				                </div>
+				              </div>
+
+				              <div class="row">
+				                <div class="col-md-6 form-group">
+				                  <label for="" class="form-control-label">Class</label>
+				                  <input type="number" name="stu_class" id="stu_class" placeholder="" class="form-control">
+				                </div>
+				                <div class="col-md-6 form-group">
+				                  <label for="" class="form-control-label">Parent Name</label>
+				                  <input type="text" name="stu_parent_name" id="stu_parent_name" placeholder="" class="form-control">
+				                </div>
+				              </div>
+
+				              <div class="row">
+				                <div class="col-md-4 form-group">
+				                  <label for="" class="form-control-label">Phone 1</label>
+				                  <input type="number" name="stu_phone1" id="stu_phone1" placeholder="" class="form-control">
+				                </div>
+				                <div class="col-md-4 form-group">
+				                  <label for=""  class="form-control-label">Phone 2</label>
+				                  <input type="number" name="stu_phone2" id="stu_phone2" placeholder="" class="form-control">
+				                </div>
+				                <div class="col-md-4 form-group">
+				                  <label for="" class="form-control-label">Email</label>
+				                  <input type="email" name="stu_email" id="stu_email" placeholder="" class="form-control">
+				                </div>
+				              </div>
+
+				              <div class="row">
+				                <div class="col-md-6 form-group">
+				                  <label for="" class="form-control-label">Address 1</label>
+				                  <textarea name="stu_address1" id="stu_address1" rows="2" placeholder="Address...." class="form-control"></textarea>
+				                </div>
+				                <div class="col-md-6 form-group">
+				                  <label for="" class="form-control-label">Address 2</label>
+				                  <textarea name="stu_address2" id="stu_address2" rows="2" placeholder="Address...." class="form-control"></textarea>
+				                </div>
+				              </div>
+
+				              <div class="row">
+				                <div class="col-md-4 form-group">
+				                  <label for="" class="form-control-label">PostCode</label>
+				                  <input type="text" name="stu_postcode" id="stu_postcode" placeholder="" class="form-control">
+				                </div>
+				                <div class="col-md-4 form-group">
+				                  <label for="" class="form-control-label">School Name</label>
+				                  <input type="text" name="stu_school_name" id="stu_school_name" placeholder="" class="form-control">
+				                </div>
+				                <div class="col-md-4 form-group">
+				                  <label for="" class="form-control-label">School Year</label>
+				                  <input type="number" name="stu_school_year" id="stu_school_year" placeholder="" class="form-control">
+				                </div>
+				              </div><br/>
+
+				              <div class="row">
+				                <div class="col-md-6 form-group">
+				                  <label> Gender </label>
+				                    <input type="radio" name="stu_gender" value="male"> Male
+				                    <input type="radio" name="stu_gender" value="female"> Female<br>
+				                </div>
+				                <div class="col-sm-6 form-group">
+				                  <label class="form-control-label">Joined Date</label>
+				                  <div id="joinedDate" class="input-group date" data-date-format="dd-mm-yyyy">
+				                    <input type="text" class="form-control" name="stu_joined_date" id="stu_joined_date" readonly/>
+				                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+				                  </div>
+				                </div>
+				              </div><br/>
+
+				              <button type="submit" id="studentBtn" class="btn btn-primary">Submit</button>
+				            </form>
+					      </div>
+
+					      <!-- Modal footer -->
+					      <div class="modal-footer" style="background-color: #d5d9fa;">
+					        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					      </div>
+
+					    </div>
+					  </div>
+					</div>
+                </div> <!--div 6 -->
+           
+
+                <div class="col-lg-3">
+                    <div class="card-body"> 
+                        <!-- <canvas id="TrafficChart"></canvas>   -->
+                        <!-- <div id="traffic-chart" class="traffic-chart"></div> -->
+                    </div>
+                </div>
+
+
+
+            </div> <!-- /.row end --> 
+        </div><!-- card end -->
+
+    </div><!-- /# column -->
+</div><!--  Traffic  End -->
+{% endblock detail %}
+
+{% block extra_js %}
+<script src="{% static 'dashCss/staticPagesJs/ManagerJs/updateStudent.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'dashCss/staticPagesJs/ManagerJs/studentRegister.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashCss/staticPagesJs/datepicker.js'  %}"></script> 
+{% endblock %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'dashCss/staticPagesCss/DateTimepicker.css' %}">
+{% endblock %}
+
+
+
+
+        

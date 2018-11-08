@@ -1,0 +1,68 @@
+{% extends "BaseDashboard.html" %}
+{% load static %}
+
+<!-- {% block logo %}
+	<a class="navbar-brand" href="./"><img src="{% static 'dashCss/images/logo.png' %}" alt="Logo"></a>
+{% endblock logo %} -->
+
+<!-- leftbar -->
+{% block NavItems %}
+<li class="menu-title">Admin Role</li><!-- /.menu-title -->
+<!-- <li class="menu-item-has-children dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Create </a>
+    <ul class="sub-menu children dropdown-menu">
+        <li><i class="fa fa-id-badge"></i><a href="/CreateCenter/">New Center</a></li>
+       	<li><i class="fa fa-bars"></i><a href="/createBatch/">New Batch</a></li>
+        <li><i class="fa fa-puzzle-piece"></i><a href="/ManagerRegister/">New Manager</a></li>
+        
+    </ul>
+</li> -->
+<li class="menu-item-has-children dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Create/Update </a>
+    <ul class="sub-menu children dropdown-menu">
+        <li><i class="fa fa-id-badge"></i><a href="/center/">Center</a></li> 
+        <li><i class="fa fa-bars"></i><a href="/batch/">Batch</a></li>
+        <li><i class="fa fa-id-badge"></i><a href="/manager/">Manager</a></li> 
+        <!-- <li><i class="fa fa-puzzle-piece"></i><a href="/ManagerRegister/">Manager</a></li>        -->
+        
+    </ul>
+</li>
+
+<li class="menu-item-has-children dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Reports</a>
+    <!-- <ul class="sub-menu children dropdown-menu">
+        <li><i class="fa fa-table"></i><a href="tables-basic.html">By Entry </a></li>
+        <li><i class="fa fa-table"></i><a href="tables-data.html">By Excel</a></li>
+    </ul> -->
+</li>
+<!-- <li><a href="/upload/"> <i class="menu-icon fa fa-th"></i>Upload </a></li> -->
+<li class="menu-item-has-children dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Upload</a>
+    <ul class="sub-menu children dropdown-menu">
+        <li><i class="fa fa-table"></i><a href="/upload/">By Entry </a></li>
+        <li><i class="fa fa-table"></i><a href="/ExcelUpload/">By Excel</a></li>
+    </ul>
+</li>
+
+
+
+<li><a href="/checking/"> <i class="menu-icon fa fa-th"></i>Checking </a></li>
+
+{% endblock NavItems %}
+      
+{% block detail %}
+{% endblock detail %}
+
+{% block extra %}
+{% endblock extra %}
+
+
+{% block extra_js %}
+<script type="text/javascript" src="../static/dashCss/staticPagesJs/checking.js">
+</script>
+<script type="text/javascript" src="../static/dashCss/staticPagesJs/updateCenter.js">
+</script>
+<script src="{% static 'dashCss/staticPagesJs/updateBatch.js' %}"></script>
+ <script type="text/javascript" src="../static/dashCss/staticPagesJs/datepicker.js">
+</script>
+{% endblock %}

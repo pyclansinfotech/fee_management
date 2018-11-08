@@ -1,0 +1,39 @@
+{% extends "BaseDashboard.html" %}
+{% load static %}
+
+{% block logo %}
+    <a class="navbar-brand" href="./"><img src="{% static 'dashCss/images/managerLogo.png' %}" alt="Logo" width="44px"></a>
+{% endblock logo %}
+
+<!-- sidebar items change -->
+{% block NavItems %}
+
+<li class="menu-title">Manager Role</li><!-- /.menu-title -->
+               <!--  <li><a href="/studentRegister/"> <i class="menu-icon fa fa-th"></i>Register Student </a></li> -->
+                <li><a href="/student/"> <i class="menu-icon fa fa-th"></i>Student </a></li>
+                <!-- <li><a href="/feeReceipt/"> <i class="menu-icon fa fa-th"></i>Receipt Entry </a></li>  -->
+                <li><a href="/receipt/"> <i class="menu-icon fa fa-th"></i>Receipt </a></li>               
+
+               <!--  <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Update </a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-id-badge"></i><a href="/student/">Update Student</a></li> 
+                        <li><i class="fa fa-bars"></i><a href="/updateFeeReceipt/">Update Receipt</a></li>
+                        
+                    </ul>
+                </li> -->
+                
+                <li class="menu-item-has-children dropdown">
+                    <a href="./" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Reports</a>
+                    <!-- <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">Basic Form</a></li>
+                        <li><i class="menu-icon fa fa-th"></i><a href="forms-advanced.html">Advanced Form</a></li>
+                    </ul> -->
+                </li>
+                <li><a href="#"> <i class="menu-icon fa fa-th"></i>Notice </a></li>
+{% endblock NavItems %}
+{% block detail %}
+{% endblock detail %}
+
+{% block extra %}
+{% endblock extra %}

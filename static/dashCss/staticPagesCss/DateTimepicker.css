@@ -1,0 +1,19 @@
+.datepicker {
+    font-size: 0.875em;
+}
+.datepicker td, .datepicker th {
+    width: 2.5em;
+    height: 2.0em;
+}
+.datepicker-months td, .datepicker-months th {
+    width: 3.5em;
+    height: 2.0em;
+}
+.datepicker-years td, .datepicker-years th {
+    width: 3.5em;
+    height: 2.0em;
+}
+
+
+
+

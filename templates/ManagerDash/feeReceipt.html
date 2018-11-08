@@ -1,0 +1,126 @@
+{% extends "ManagerDash/ManagerDashboard.html" %}
+{% load static %}
+
+{% block maincontent %}
+<div class="content">
+  <div class="animated fadeIn">
+    <div class="row">
+      <div class="col-xs-2 col-sm-2"></div>
+      <div class="col-xs-8 col-sm-8">
+        <div class="card">
+          <div class="card-header text-center"><strong>FeeReceipt</strong></div>
+
+          <form id="feeReceipt_form" method="post">
+
+            <div class="alert alert-danger" id="dataAlert" style="display:none;">
+              <div id="msgdataAlert"></div>
+            </div>
+
+            <div class="card-body card-block">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="" class="form-control-label">Receipt</label>
+                  <input type="number" name="fee_receipt" id="fee_receipt" placeholder="" class="form-control">
+                </div>
+
+                <div class="col-sm-6 form-group">
+                  <label class="form-control-label">Date</label>
+                  <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+                    <input type="text" class="form-control" name="fee_date" id="fee_date" readonly/>
+                    <span class="input-group-addon"><i class="fa fa-calendar">
+                    </i></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4 form-group">
+                  <label>Fee Type</label>
+                   <select name="fee_feeType" class="form-control" tabindex="1">
+                      <option value="">Choose a type</option>
+                      <option value="Registration Fee">Registration Fee</option>
+                      <option value="Extra Material Charges">Extra Material Charges</option>
+                      <option value="Examination Fee">Examination Fee</option>
+                      <option value="Tuition Fee">Tution Fee</option>
+                    </select>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="" class="form-control-label">Gross Amount</label>
+                  <input type="number" step="any" name="fee_gross_amount" id="fee_gross_amount" placeholder="" class="form-control">
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="" class="form-control-label">Discount Amount</label>
+                  <input type="number" step="any" name="fee_discount_amount" id="fee_discount_amount" placeholder="" class="form-control">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="" class="form-control-label">Discount Note</label>
+                  <input type="text" name="fee_discount_note" id="fee_discount_note" placeholder="" class="form-control">
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="" class="form-control-label">Net Amount</label>
+                  <input type="number" step="any" name="fee_net_amount" id="fee_net_amount" placeholder="" class="form-control">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="" class="form-control-label">MonthsToSpan</label>
+                  <input type="number" name="fee_monthsTospan" id="fee_monthsTospan" placeholder="" class="form-control">
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="" class="form-control-label">ModeOfPayment</label>
+                  <select name="fee_modeOfPayment" class="form-control" tabindex="1">
+                      <option value="">Choose a type</option>
+                      <option value="Cash">Cash</option>
+                      <option value="Bank">Bank</option>
+                      <option value="Card">Card</option>
+                      <option value="Cheque">Cheque</option>
+                    </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 form-group">
+                  <label for="" class="form-control-label">Reference</label>
+                  <input type="text" name="fee_reference" id="fee_reference" placeholder="" class="form-control">
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="" class="form-control-label">Year</label>
+                  <input type="number" min="1900" max="9999" name="fee_Year" id="fee_Year" placeholder="" class="form-control">
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="" class="form-control-label">CollectorId</label>
+                  <input type="number" name="fee_collectorId" id="fee_collectorId" placeholder="" class="form-control">
+                </div>
+              </div><br/>
+
+              <div class="form-group">
+                <label class="form-control-label">Checked &nbsp; &nbsp;</label>
+                  <input type="checkbox" name="fee_checked" value="1"> &nbsp;True &nbsp; &nbsp; 
+                  <input type="checkbox" name="fee_checked" value="0"> &nbsp;False
+              </div>
+
+              <button type="submit" id="feeReceiptBtn" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-xs-2 col-sm-2"></div>
+    </div><!-- row end -->
+
+  </div><!-- animated end -->
+</div><!-- Content end -->
+<div class="clearfix"></div>
+{% endblock %}
+
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'dashCss/staticPagesJs/ManagerJs/feeReceipt.js' %}"></script>
+<script type="text/javascript" src="../static/dashCss/staticPagesJs/datepicker.js"></script>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'dashCss/staticPagesCss/DateTimepicker.css' %}">
+{% endblock %}

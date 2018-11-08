@@ -1,0 +1,68 @@
+{% extends "AdminDash/AdminDashboard.html" %}
+
+{% load static %}
+
+{% block maincontent %}
+<div class="content">
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-xs-2 col-sm-2"></div>
+    <div class="col-xs-8 col-sm-8">
+      <div class="card">
+        <div class="card-header text-center" style="font-size: 22px;"><strong>Upload Form</strong></div>
+        
+         <div class="alert alert-danger" id="msgAlert" style="display:none;">
+         <div id="msgHtmlAlert"></div>
+        </div>
+         <div class="alert alert-danger" id="uploadAlert" style="display: none;">
+         <div id="msguploadAlert"></div>
+        </div>
+       
+
+        <form id="excelUpload_form"  enctype="multipart/form-data">
+          <div class="card-body card-block">
+
+            <div class="row">
+            <div class="col-sm-12 form-group">
+            <label>Select file to upload multiple records:</label><br>
+          <!--   <input type="file" id="excelUpload" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="excelUpload"/>   --> 
+          <input id="fileinput" name="fileinput" class="file-upload form-group" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"  onchange="readURL(this);" style="margin-top: 20px;" />
+
+		
+            </div>
+           </div><br>   
+            <button  type="button" id="excelSubBtn"  class="btn btn-primary">Submit</button>
+
+
+          <div class="form-group">
+                   <textarea hidden="true" id="base"></textarea>
+          </div>
+
+
+            
+          </div>
+        </form>
+      </div><!-- card end -->
+    </div>
+    <div class="col-xs-2 col-sm-2"></div>
+  </div><!-- row end -->
+
+</div><!-- animated end -->
+</div><!-- Content end -->
+<div class="clearfix"></div>
+{% endblock maincontent %}
+
+
+{% block extra_js %} 
+
+<script type="text/javascript" src="../static/dashCss/staticPagesJs/ExcelUpload.js">
+</script>
+{% endblock %}
+
+{% block extra_css %}
+
+{% endblock %}
+
+
+
+

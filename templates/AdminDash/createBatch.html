@@ -1,0 +1,105 @@
+{% extends "AdminDash/AdminDashboard.html" %}
+{% load static %}
+
+{% block maincontent %}
+<div class="content">
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-xs-2 col-sm-2"></div>
+    <div class="col-xs-8 col-sm-8">
+      <div class="card">
+        <div class="card-header"><strong>Create Batch</strong></div>
+         <div class="alert alert-danger" id="dataAlert" style="display:none;">
+         <div id="msgdataAlert"></div>
+        </div>
+        <form id="batch_form" >
+          <div class="card-body card-block">
+            <div class="row">
+              <div class="col-sm-6 form-group">
+                <label class="form-control-label">Day</label>
+                <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+                  <input type="text" class="form-control" name="batch_day" id="batch_day" readonly/>
+                  <span class="input-group-addon"><i class="fa fa-calendar"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-6 form-group">
+                <label>Time</label>
+                <div class="form-group">
+                <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
+                    <input type="text" id="batch_time" name="batch_time" class="form-control datetimepicker-input" data-target="#datetimepicker3"/>
+                    <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
+                    </div>
+                </div>
+            </div>
+              </div>
+            </div><br/>
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                  <label class="form-control-label">Center Type (select one):</label>
+                  <select class="form-control" id="batch_center" name="batch_center">
+                    <option value="">Select any one</option>
+                    <option value="Own centres">Own centres</option>
+                    <option value="Management centres">Management centres</option>
+                    <option value="Franchisee centres">Franchisee centres</option>
+                  </select>
+                 </div>
+
+                 <div class="col-md-6 form-group">
+                  <label class="form-control-label">Center</label>
+                  <select class="form-control" id="batch_center_name" name="batch_center_name">
+                    <option value="">Select any one</option> 
+                    {% for centerdata in centerName %}                 
+                    <option value="{{centerdata.name}}">{{centerdata.name}}</option>
+                    {% endfor %}
+                  </select>
+                 </div>
+              </div>
+                
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <label for="" class="form-control-label">Batch Student</label>
+                <input type="number" name="bat_student" id="bat_student" placeholder="" class="form-control">
+              </div>
+              <div class="col-md-4 form-group">
+                <label for="" class="form-control-label">Batch Level</label>
+                <input type="number" name="bat_level" id="bat_level" placeholder="" class="form-control">
+              </div>
+              <div class="col-md-4  form-group">
+                  <label for="" class="form-control-label">Room</label>
+                  <!-- <textarea name="bat_room" id="bat_room" rows="1"  class="form-control"></textarea> -->
+                  <input type="number" name="bat_room" id="bat_room" placeholder="" class="form-control">
+                </div>
+            </div>
+            <button type="submit" id="batchBtn" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div><!-- card end -->
+    </div>
+    <div class="col-xs-2 col-sm-2"></div>
+  </div><!-- row end -->
+
+</div><!-- animated end -->
+</div><!-- Content end -->
+<div class="clearfix"></div>
+{% endblock maincontent %}
+
+
+{% block extra_js %}
+
+<script type="text/javascript" src="../static/dashCss/staticPagesJs/datepicker.js">
+</script>
+<script type="text/javascript" src="../static/dashCss/staticPagesJs/createBatch.js">
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'dashCss/staticPagesCss/util.css' %}">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+
+{% endblock %}

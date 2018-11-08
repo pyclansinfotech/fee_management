@@ -1,0 +1,168 @@
+{% extends "ManagerDash/ManagerDashboard.html" %}
+{% load static %}
+
+{% block maincontent %}
+<div class="content">
+  <div class="animated fadeIn">
+    <div class="row">
+      <div class="col-xs-2 col-sm-2"></div>
+      <div class="col-xs-8 col-sm-8">
+        <div class="card">
+          <div class="card-header text-center"><strong>Student Registration</strong></div>
+          <div class="card-body card-block">
+            <form id="student_form" method="post">
+              <div class="alert alert-danger" id="dataAlert" style="display:none;">
+                <div id="msgdataAlert"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="" class="form-control-label">First Name</label>
+                  <input type="text" name="stu_first_name" id="stu_first_name" placeholder="" class="form-control">
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="" class="form-control-label">Second Name</label>
+                  <input type="text" name="stu_second_name" id="stu_second_name" placeholder="" class="form-control">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4 form-group">
+                  <label for="" class="form-control-label">Level</label>
+                  <input type="number" name="stu_idLevel" id="stu_idLevel" placeholder="" class="form-control">
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="" class="form-control-label">CI</label>
+                  <input type="number" name="stu_idci" id="stu_idci" placeholder="" class="form-control">
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="" class="form-control-label">Status</label>
+                  <input type="number" name="stu_status" id="stu_status" placeholder="" class="form-control">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="" class="form-control-label">Level Certified</label>
+                  <input type="number" name="stu_idlevel_certified" id="stu_idlevel_certified" placeholder="" class="form-control">
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="" class="form-control-label">Level Classes Done
+                  </label>
+                  <input type="number" name="stu_level_classes_done" id="stu_level_classes_done" placeholder="" class="form-control">
+                </div>
+              </div>
+            
+              <div class="row">
+                <div class="col-md-4 form-group">
+                  <label>School Type</label>
+                    <select name="stu_school_type" class="form-control" tabindex="1">
+                      <option value="">Choose a type</option>
+                      <option value="Private School">Private School</option>
+                      <option value="Govt School">State School(Govt)</option>
+                    </select>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label>Special Need</label>
+                    <select name="stu_special_need" class="form-control" tabindex="1">
+                      <option value="">Choose a type</option>
+                      <option value="1">Yes</option>
+                      <option value="0">No</option>
+                    </select>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="" class="form-control-label readonly" >Special Need Note
+                  </label>
+                  <input type="text" name="stu_special_need_note" id="stu_special_need_note" placeholder="" class="form-control">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="" class="form-control-label">Class</label>
+                  <input type="number" name="stu_class" id="stu_class" placeholder="" class="form-control">
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="" class="form-control-label">Parent Name</label>
+                  <input type="text" name="stu_parent_name" id="stu_parent_name" placeholder="" class="form-control">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4 form-group">
+                  <label for="" class="form-control-label">Phone 1</label>
+                  <input type="number" name="stu_phone1" id="stu_phone1" placeholder="" class="form-control">
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for=""  class="form-control-label">Phone 2</label>
+                  <input type="number" name="stu_phone2" id="stu_phone2" placeholder="" class="form-control">
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="" class="form-control-label">Email</label>
+                  <input type="email" name="stu_email" id="stu_email" placeholder="" class="form-control">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="" class="form-control-label">Address 1</label>
+                  <textarea name="stu_address1" id="stu_address1" rows="2" placeholder="Address...." class="form-control"></textarea>
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="" class="form-control-label">Address 2</label>
+                  <textarea name="stu_address2" id="stu_address2" rows="2" placeholder="Address...." class="form-control"></textarea>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4 form-group">
+                  <label for="" class="form-control-label">PostCode</label>
+                  <input type="text" name="stu_postcode" id="stu_postcode" placeholder="" class="form-control">
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="" class="form-control-label">School Name</label>
+                  <input type="text" name="stu_school_name" id="stu_school_name" placeholder="" class="form-control">
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="" class="form-control-label">School Year</label>
+                  <input type="number" name="stu_school_year" id="stu_school_year" placeholder="" class="form-control">
+                </div>
+              </div><br/>
+
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label> Gender </label>
+                    <input type="radio" name="stu_gender" value="male"> Male
+                    <input type="radio" name="stu_gender" value="female"> Female<br>
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label class="form-control-label">Joined Date</label>
+                  <div id="joinedDate" class="input-group date" data-date-format="dd-mm-yyyy">
+                    <input type="text" class="form-control" name="stu_joined_date" id="stu_joined_date" readonly/>
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                  </div>
+                </div>
+              </div><br/>
+
+              <button type="submit" id="studentBtn" class="btn btn-primary">Submit</button>
+            </form>
+          </div><!-- card-body end -->
+          
+        </div>
+      </div>
+      <div class="col-xs-2 col-sm-2"></div>
+    </div><!-- row end -->
+
+  </div><!-- animated end -->
+</div><!-- Content end -->
+<div class="clearfix"></div>
+{% endblock  %}
+
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'dashCss/staticPagesJs/ManagerJs/studentRegister.js' %}"></script>
+<script type="text/javascript" src="../static/dashCss/staticPagesJs/datepicker.js"></script>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'dashCss/staticPagesCss/DateTimepicker.css' %}">
+{% endblock %}

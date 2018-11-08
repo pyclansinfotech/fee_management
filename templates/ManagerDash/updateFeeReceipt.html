@@ -1,0 +1,324 @@
+{% extends "ManagerDash/ManagerDashboard.html" %}
+{% load static %}
+
+{% block detail %}
+<!--  Traffic  -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">  
+           
+            <div class="row" style="margin-top: 30px;"> 
+                <div class="col-lg-3">
+                	<h4 class="text-center"><strong>Fee Receipt List</strong></h4>
+                    <div class="card-body">
+	                    <div class="card-content">
+	                    	<table id="receiptUpdateTable" class="table table-striped table-bordered" style="width:100%">
+						        <thead>
+						        	<tr>
+						                <th class="text-center "> <b>Receipt Number</b></th>  
+						            </tr>
+						        </thead>
+						        <tbody>
+						            {% for data in receiptId %}
+						            <tr>	
+						            	<th><a  data-id="{{ data.id }}" href="/feeReceiptData/{{data.id}}/">receipt_{{ data.receipt }} </a></th> 
+
+						            </tr>
+						            {% endfor %}   
+						        </tbody>
+							</table>
+	                    </div>
+                    </div> <!-- /.card-body -->
+                </div>
+
+                <div class="col-lg-6">
+                	<h4 class="text-center"><strong>Fee Receipt Detail</strong></h4>	
+                	<div class="card">
+                		<div class="card-body"> 
+	                       
+		                    <!-- <div class="card-content"> -->
+				   		<div class="alert alert-danger" id="dataAlert" style="display:none;">
+					            <div id="msgdataAlert"></div>
+					    </div>	
+						{% if receiptData is not defined %}
+							{% for data in receiptData %}						
+					              
+					             
+					          <form id="feeReceiptUpdate" method="post" >
+
+							        <div class="alert alert-danger" id="dataAlert" style="display:none;">
+							          <div id="msgdataAlert"></div>
+							        </div>
+							        <input type="hidden" id="receiptId" name="receiptId"  value="{{data.id}}" >	
+
+							        <div class="card-body card-block">
+							          <div class="row">
+							            <div class="col-md-6 form-group">
+							              <label for="" class="form-control-label">Receipt</label>
+							              <input type="number" readonly name="fee_receipt" id="fee_receipt" value="{{data.receipt}}" class="form-control">
+							            </div>
+
+							            <div class="col-sm-6 form-group">
+							              <label class="form-control-label">Date</label>
+							              <div id="datepickerReceipt" class="input-group date" data-date-format="mm-dd-yyyy">
+							                <input type="text" class="form-control" value="{{NewDate}}" name="fee_date" id="fee_date" readonly/>
+							                <span class="input-group-addon"><i class="fa fa-calendar">
+							                </i></span>
+							              </div>
+							            </div>
+							          </div>
+
+							          <div class="row">
+							          	<div class="col-md-12 form-group">
+							              <label>Fee Type</label>
+							               <select name="fee_feeType" readonly  class="form-control" tabindex="1">
+							                  <option value="{{data.feeType}}">{{data.feeType}}</option>
+							                  <!-- <option value="Registration Fee">Registration Fee</option>
+							                  <option value="Extra Material Charges">Extra Material Charges</option>
+							                  <option value="Examination Fee">Examination Fee</option>
+							                  <option value="Tuition Fee">Tution Fee</option> -->
+							                </select>
+							            </div>
+					                	</div>	
+
+							          <div class="row">	
+										<div class="col-md-6 form-group">
+						                  <label for="" class="form-control-label">Gross Amount</label>
+						                  <input type="number" step="any" readonly value="{{data.gross_amount}}" name="fee_gross_amount" id="fee_gross_amount" placeholder="" class="form-control">
+						                </div>
+						                <div class="col-md-6 form-group">
+							                <label for="" class="form-control-label">Discount Amount</label>
+							                <input type="number" readonly value="{{data.discount_amount}}" step="any" name="fee_discount_amount" id="fee_discount_amount" placeholder="" class="form-control">
+					                	</div>						        
+							          </div>
+							           
+
+							          <div class="row">
+							            <div class="col-md-6 form-group">
+							              <label for="" class="form-control-label">Discount Note</label>
+							              <input type="text" readonly value="{{data.discount_note}}" name="fee_discount_note" id="fee_discount_note" placeholder="" class="form-control">
+							            </div>
+							           <div class="col-md-6 form-group">
+						                  <label for="" class="form-control-label">Net Amount</label>
+						                  <input readonly type="number" step="any" value="{{data.net_amount}}" name="fee_net_amount" id="fee_net_amount" placeholder="" class="form-control">
+						                </div>
+							          </div>
+
+							          <div class="row">
+			       						<div class="col-md-6 form-group">
+						                  <label for="" class="form-control-label">MonthsToSpan</label>
+						                  <input type="number" readonly value="{{data.monthsTospan}}" name="fee_monthsTospan" id="fee_monthsTospan" placeholder="" class="form-control">
+						                </div>
+							            <div class="col-md-6 form-group">
+							              <label for="" class="form-control-label">ModeOfPayment</label>
+							              <select name="fee_modeOfPayment" readonly class="form-control" tabindex="1">
+							                  <option value="{{data.modeOfPayment}}">{{data.modeOfPayment}}</option>
+							                  <!-- <option value="Cash">Cash</option>
+							                  <option value="Bank">Bank</option>
+							                  <option value="Card">Card</option>
+							                  <option value="Cheque">Cheque</option> -->
+							                </select>
+							            </div>
+							          </div>						         
+
+							          <div class="row">
+							            <div class="col-md-4 form-group">
+							              <label for="" class="form-control-label">Reference</label>
+							              <input type="text" readonly name="fee_reference" value="{{data.reference}}"  id="fee_reference" placeholder="" class="form-control">
+							            </div>
+							            <div class="col-md-4 form-group">
+						                  <label for=""  class="form-control-label">Year</label>
+						                  <input type="number" readonly min="1000" max="9999" name="fee_Year" id="fee_Year" value="{{data.year}}" class="form-control">
+						                </div>
+							            <div class="col-md-4 form-group">
+				  							<label for="" class="form-control-label">CollectorId</label>
+					                  	   <input readonly type="number" value="{{data.collectorId}}" name="fee_collectorId" id="fee_collectorId" placeholder="" class="form-control">
+							            </div>
+							          </div><br/>
+
+							          <div class="form-group">
+							            <label class="form-control-label">Checked {{data.checked}} &nbsp; &nbsp;</label>	
+
+							            <input type="checkbox" name="fee_checked" checked value="1"> &nbsp;True &nbsp; &nbsp;
+							            <input type="checkbox" name="fee_checked" value="0"> &nbsp;False
+							          </div>
+							          <button type="Button" id="receiptUpdateBtn1" class="btn btn-primary">Print/Save</button>
+							        </div>
+							      </form>
+
+
+								<!-- </div> -->
+						    {% endfor %}
+
+							{% else %}
+							<div class="row">
+								<div class="col-md-12">
+									<h5 style="color: red">
+									   <i class="fa fa-hand-o-left"></i> Select Receipt  Number from Fee Receipt list to view Receipt data.
+									</h5>
+								</div>								
+							</div>						    
+						    {% endif %}	
+		               
+	                	</div> <!--card body -->
+                    </div><!-- card end -->
+
+						<!-- Button to Open the Modal -->
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalFeeReceipt" style="margin-bottom: 25px;">New </button>
+
+						<!-- The Modal -->
+						<div class="modal" id="myModalFeeReceipt">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+
+						      <!-- Modal Header -->
+						      <div class="modal-header" style="background-color: #5ba7fa;color:#fff;">
+						        <h4 class="modal-title"><strong>Fee Receipt</strong></h4>
+						        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						      </div>
+
+						      <!-- Modal body -->
+						      <div class="modal-body">
+						        <form id="feeReceipt_form" method="post">
+
+							        <div class="alert alert-danger" id="dataAlert" style="display:none;">
+							          <div id="msgdataAlert"></div>
+							        </div>
+
+							        <div class="card-body card-block">
+							          <div class="row">
+							            <div class="col-md-6 form-group">
+							              <label for="" class="form-control-label">Receipt</label>
+							              <input type="number" name="fee_receipt" id="fee_receipt" placeholder="" class="form-control">
+							            </div>
+
+							            <div class="col-sm-6 form-group">
+							              <label class="form-control-label">Date</label>
+							              <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+							                <input type="text" class="form-control" name="fee_date" id="fee_date" readonly/>
+							                <span class="input-group-addon"><i class="fa fa-calendar">
+							                </i></span>
+							              </div>
+							            </div>
+							          </div>
+
+							          <div class="row">
+							            <div class="col-md-4 form-group">
+							              <label>Fee Type</label>
+							               <select name="fee_feeType" class="form-control" tabindex="1">
+							                  <option value="">Choose a type</option>
+							                  <option value="Registration Fee">Registration Fee</option>
+							                  <option value="Extra Material Charges">Extra Material Charges</option>
+							                  <option value="Examination Fee">Examination Fee</option>
+							                  <option value="Tuition Fee">Tution Fee</option>
+							                </select>
+							            </div>
+							            <div class="col-md-4 form-group">
+							              <label for="" class="form-control-label">Gross Amount</label>
+							              <input type="number" step="any" name="fee_gross_amount" id="fee_gross_amount" placeholder="" class="form-control">
+							            </div>
+							            <div class="col-md-4 form-group">
+							              <label for="" class="form-control-label">Discount Amount</label>
+							              <input type="number" step="any" name="fee_discount_amount" id="fee_discount_amount" placeholder="" class="form-control">
+							            </div>
+							          </div>
+
+							          <div class="row">
+							            <div class="col-md-6 form-group">
+							              <label for="" class="form-control-label">Discount Note</label>
+							              <input type="text" name="fee_discount_note" id="fee_discount_note" placeholder="" class="form-control">
+							            </div>
+							            <div class="col-md-6 form-group">
+							              <label for="" class="form-control-label">Net Amount</label>
+							              <input type="number" step="any" name="fee_net_amount" id="fee_net_amount" placeholder="" class="form-control">
+							            </div>
+							          </div>
+
+							          <div class="row">
+							            <div class="col-md-6 form-group">
+							              <label for="" class="form-control-label">MonthsToSpan</label>
+							              <input type="number" name="fee_monthsTospan" id="fee_monthsTospan" placeholder="" class="form-control">
+							            </div>
+							            <div class="col-md-6 form-group">
+							              <label for="" class="form-control-label">ModeOfPayment</label>
+							              <select name="fee_modeOfPayment" class="form-control" tabindex="1">
+							                  <option value="">Choose a type</option>
+							                  <option value="Cash">Cash</option>
+							                  <option value="Bank">Bank</option>
+							                  <option value="Card">Card</option>
+							                  <option value="Cheque">Cheque</option>
+							                </select>
+							            </div>
+							          </div>
+							          <div class="row">
+							            <div class="col-md-4 form-group">
+							              <label for="" class="form-control-label">Reference</label>
+							              <input type="text" name="fee_reference" id="fee_reference" placeholder="" class="form-control">
+							            </div>
+							            <div class="col-md-4 form-group">
+							              <label for="" class="form-control-label">Year</label>
+							              <input type="number" min="1900" max="9999" name="fee_Year" id="fee_Year" placeholder="" class="form-control">
+							            </div>
+							            <div class="col-md-4 form-group">
+							              <label for="" class="form-control-label">CollectorId</label>
+							              <input type="number" name="fee_collectorId" id="fee_collectorId" placeholder="" class="form-control">
+							            </div>
+							          </div><br/>
+
+							          <div class="form-group">
+							            <label class="form-control-label">Checked &nbsp; &nbsp;</label>
+							              <input type="checkbox" name="fee_checked" value="1"> &nbsp;True &nbsp; &nbsp; 
+							              <input type="checkbox" name="fee_checked" value="0"> &nbsp;False
+							          </div>
+
+							          <button type="submit" id="feeReceiptBtn" class="btn btn-primary">Submit</button>
+							        </div>
+							      </form>
+						      </div>
+
+						      <!-- Modal footer -->
+						      <div class="modal-footer" style="background-color: #d5d9fa;">
+						        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+						      </div>
+
+						    </div>
+						  </div>
+						</div>
+
+
+                </div> <!--div 6 -->
+           
+
+                <div class="col-lg-3">
+                    <div class="card-body"> 
+                        <!-- <canvas id="TrafficChart"></canvas>   -->
+                        <!-- <div id="traffic-chart" class="traffic-chart"></div> -->
+                    </div>
+                </div>
+
+
+
+            </div> <!-- /.row end --> 
+        </div><!-- card end -->
+
+    </div><!-- /# column -->
+</div><!--  Traffic  End -->
+{% endblock detail %}
+
+{% block extra_js %}
+<script src="{% static "dashCss/staticPagesJs/ManagerJs/updateFeeReceipt.js" %}"></script>
+<script type="text/javascript" src="{% static 'dashCss/staticPagesJs/ManagerJs/feeReceipt.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashCss/staticPagesJs/datepicker.js'  %}"></script>
+{% endblock %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'dashCss/staticPagesCss/DateTimepicker.css' %}">
+{% endblock %}
+
+
+
+
+
+
+        

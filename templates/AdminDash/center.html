@@ -1,0 +1,126 @@
+{% extends "AdminDash/ManagerRegister.html" %}
+{% load static %}
+
+{% block maincontent %} 
+<div class="content">
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-xs-2 col-sm-2"></div>
+    <div class="col-xs-8 col-sm-8">
+      <div class="card">
+        <div class="card-header"><strong>Create Center</strong></div>
+          <div class="card-body card-block">
+              <div class="form-group">
+                <div class="col-md-9 col-md-offset-3">
+                  <div id="messages"></div>
+                </div>
+                <div class="alert alert-danger" id="dataAlert" style="display:none;">
+                  <div id="msgdataAlert"></div>
+                </div>
+              </div>
+            <form id="centerForm" method="Post">
+              <div class="row">
+                  <div class="col-md-6 form-group">
+                      <label for="" class=" form-control-label">Name</label>
+                      <input type="text" name="cen_name" id="cen_name" placeholder="Enter center name" class="form-control">
+                  </div>
+                  <div class="col-md-6 form-group">
+                      <div class="form-group"><label for="cen_postcode" class="form-control-label">Post Code</label><input type="number" name="cen_postcode" placeholder="Enter PostCode" class="form-control"></div>
+                  </div>
+              </div>
+
+              <div class="form-group">
+                <label for="" class="form-control-label">Correspondace Address</label>
+                <textarea id="cen_address1" name="cen_address1" rows="2" placeholder="Enter Address of Correspondance"  class="form-control"></textarea>
+              </div>
+              
+              <div class="form-group">
+                  <label for="" class="form-control-label">Permanent Address </label>
+                  <textarea  name="cen_address2" rows="2" placeholder="Enter Permanent Address" class="form-control"></textarea>
+              </div>
+
+
+              <div class="row">
+                  <div class="col-md-6 form-group">
+                      <label for="cen_phone1" class="form-control-label">Phone1</label>
+                      <input type="number" name="cen_phone1" placeholder="Enter your Phone number" class="form-control">
+                  </div>
+                  <div class="col-md-6 form-group">
+                     <label for="cen_phone2" class="form-control-label">Phone2 </label>
+                     <input type="number" name="cen_phone2" placeholder="Enter alternate number" class="form-control">
+                  </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4 form-group">
+                  <label for="cen_manager" class="form-control-label">Manager</label>
+                    <select  name="cen_manager" class="form-control-sm form-control">
+                        <option value="">Select Manager</option>
+                        {% for data in managerData %}
+                        <option value="{{data.name}}">{{data.name}}</option>
+                        {% endfor %}
+                        
+                    </select>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label class="form-control-label">Status</label>
+                    <select  name="cen_status" class="form-control-sm form-control">
+                        <option value="">Select status</option>
+                        <option value="1">True</option>
+                        <option value="0">False</option>
+                    </select>
+                </div>
+                <div class="col-md-4 form-group">
+                      <label for="cen_email" class="form-control-label">Email</label>
+                      <input type="text" id="cen_email" name="cen_email" placeholder="Enter Email" class="form-control">
+                  </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label class="form-control-label">Center Type (select one):</label>
+                  <select class="form-control" id="cen_Type" name="cen_Type">
+                    <option value="">Select any one</option>
+                    <option value="Own centres">Own centres</option>
+                    <option value="Management centres">Management centres</option>
+                    <option value="Franchisee centres">Franchisee centres</option>
+                  </select>
+                 </div>
+
+                 <div class="col-sm-6 form-group">
+                            <label class="form-control-label">Valid Till</label>
+                            <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+                              <input type="text" class="form-control" value="{{data.day}}"  name="cen_validTill" id="cen_validTill" readonly/>
+                              <span class="input-group-addon"><i class="fa fa-calendar"></i>
+                              </span>
+                            </div>
+                  </div>
+              </div>
+
+              <input type="submit" name="createCenter" id="createCenter" class="btn btn-success" value="Submit" />
+              </form> 
+            </div> <!--card-body end -->
+         
+      </div><!-- card end -->
+    </div><!-- col-md-8 end -->
+
+    <div class="col-xs-2 col-sm-2"></div>
+  </div><!-- row end -->
+     
+</div><!-- animated end -->
+</div><!-- Content end -->
+<div class="clearfix"></div>
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="{% static 'dashCss/staticPagesJs/center.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashCss/staticPagesJs/datepicker.js'  %}"></script>
+{% endblock %}
+
+
+{% block extra_css %}
+{% endblock %}
+
+
+

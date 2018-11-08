@@ -1,0 +1,150 @@
+{% extends "BaseDashboard.html" %}
+{% load static %}
+
+{% block sidebar %}
+{% endblock sidebar %}
+
+{% block content %}
+{% block navbar %}
+
+
+
+<div id="right-panel" class="right-panel">
+  <!-- Header-->
+  <header id="header" class="header">  
+      <div class="top-left" style="width:250px;">
+          <div class="navbar-header"> 
+              {% block logo %}
+               <a class="navbar-brand" href="./"><img src="{% static 'images/images.png' %}" width="139px" alt="Logo"></a>
+            {% endblock logo %}
+          </div> 
+      </div>
+
+      <div class="top-right"> 
+          <div class="header-menu" style="padding: 15px;"> 
+              <div class="user-area float-right">
+                  <a href="#">About Us</a>
+              </div> 
+              <div class="user-area float-right">
+                  <a href="#">Contact Us</a>
+              </div> 
+              <div class="user-area float-right">
+                  <a href="./"><i class="fa fa-sign-in"></i> Login</a>
+              </div> 
+          </div>  
+      </div>
+  </header><!-- /header -->
+</div>
+{% endblock navbar %}
+
+{% block maincontent %}
+<div class="limiter">
+    <div class="container-login100" style="background-image: url('../static/images/img-01.jpg');">
+     
+    <div class="dateTime">
+      <div class="row" >
+        <div class="col-md-4">
+            <label class="labelfont">Date:</label>
+        </div>
+        <div class="col-md-8">
+            <div id="date-part-new" style="background: white" class="stat-heading bg"></div> 
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+         <label class="labelfont">Day:</label></div>
+        <div class="col-md-8">
+          <div id="day-part" class="stat-heading dayCss"></div>
+        </div>
+      </div>
+    </div>
+ 
+      <div class="wrap-login100 p-t-190 p-b-30"> <!--form div -->       
+        <div class="alert alert-danger" id="dataAlert" style="display:none;">
+         <div id="msgdataAlert"></div>
+        </div>
+
+        <form id="login_form" method="post" class="login100-form validate-form">
+          <!-- <div class="login100-form-avatar">
+            <img src="{% static 'dashCss/images/avatar-01.jpg' %}" alt="AVATAR">
+          </div> -->
+
+          <span class="login100-form-title p-t-20 p-b-45"><b> Login Form </b>
+          </span>
+
+          <div class="wrap-input100 validate-input m-b-10 form-group" data-validate = "Username is required">
+            <input class="input100" type="email" name="email" id="email" placeholder="Email">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+              <i class="fa fa-user"></i>
+            </span>
+          </div>
+
+          <div class="wrap-input100 validate-input m-b-10 form-group" data-validate = "Password is required">
+            <input class="input100" type="password" name="password" id="password" placeholder="Password">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+              <i class="fa fa-lock"></i>
+            </span>
+          </div>
+          
+          <div class="captcha" style="width: 100%">
+            <!-- 80 port -->
+          <!--  <div class="g-recaptcha" data-sitekey="6LcyGHgUAAAAANKg-kPetq3Kmfs8HMp9BHTlYcDc"></div> -->
+             <!-- localhost -->
+             <div class="g-recaptcha" data-sitekey="6LfMlHIUAAAAAOfGhoFxpZSQEeetC64xhV8tZULl"></div>
+            <span class="msg-error error" style="color: red"></span>
+           </div>
+           
+            <div class="container-login100-form-btn p-t-10">
+            <input type="submit"  id="fee_login" class="login100-form-btn" value="login">
+          </div>
+
+          <div class="text-center w-full p-t-25 p-b-230">
+            <a href="#" class="txt1">
+              Forgot Username / Password?
+            </a>
+          </div>
+
+          <div class="text-center w-full">
+            <a class="txt1" href="#">
+              Create new account
+              <i class="fa fa-long-arrow-right"></i>            
+            </a>
+          </div>
+        </form>
+      </div> <!--formDiv -->
+    <!-- </div> col6 -->
+    <!-- <div class="col-md-4"> 
+      <h1>helllloooooooooooooooooooo</h1>
+    </div>
+ -->
+
+  <!-- </div> row -->
+
+
+
+    </div>
+  </div>
+{% endblock maincontent %}
+{% endblock content %}
+
+
+{% block extra_js %}
+<script type="text/javascript">  
+var momentNow = moment();        
+        $('#date-part-new').html(momentNow.format('DD-MM-YYYY')); 
+        $('#day-part').html(momentNow.format('dddd'));
+</script>
+
+
+<script type="text/javascript" src="{% static 'dashCss/staticPagesJs/loginValidation.js' %}">
+</script>
+<!-- <script type="text/javascript" src="{% static 'dashCss/js/contact.js' %}">
+</script> -->
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'dashCss/staticPagesCss/util.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'dashCss/staticPagesCss/main.css' %}">
+{% endblock %}

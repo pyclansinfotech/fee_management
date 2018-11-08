@@ -1,0 +1,125 @@
+{% extends "AdminDash/AdminDashboard.html" %}
+{% load static %}
+
+{% block maincontent %} 
+<div class="content">
+  <div class="animated fadeIn">
+    <div class="row">
+      <div class="col-xs-2 col-sm-2"></div>
+      <div class="col-xs-8 col-sm-7">
+        <div class="card">
+          <div class="card-header text-center"><strong>Manager Creation Form
+          </strong>
+          </div>
+            <div class="card-body card-block">
+              <div class="alert alert-danger" id="dataAlert" style="display:none;">
+                  <div id="msgdataAlert"></div>
+              </div>
+            <form id="manager_form" method="post">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="" class="form-control-label">Name</label>
+                  <input type="text" id="manager_name" name="manager_name" placeholder="" class="form-control">
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="" class="form-control-label">UserName</label>
+                  <input type="text" id="manager_username" name="manager_username" placeholder="" class="form-control">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="" class="form-control-label">Email</label>
+                  <input type="email" id="manager_email" name="manager_email" placeholder="" class="form-control">
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="" class="form-control-label">Phone No</label>
+                  <input type="number" id="manager_phone_no" name="manager_phone_no" placeholder="" class="form-control">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="" class="form-control-label">Password</label>
+                  <input type="password" id="manager_password" name="manager_password" placeholder="" class="form-control">
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="" class="form-control-label">Confirm Password
+                  </label>
+                  <input type="password" id="manager_confirmPswrd" name="manager_confirmPswrd" placeholder="" class="form-control">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label class="form-control-label">Select Center (select one):</label>
+                  <select class="form-control" id="manager_center" name="manager_center">
+                    <option value="">Select one Center</option>
+                    {% for data in centerInfo %}
+                    <option value="{{data.name}}">{{data.name}}</option>
+                    {% endfor %}
+                   
+                  </select>
+                </div>
+                <div class="col-md-6 form-group">
+                  <label class="form-control-label">Select Batch (select one):</label>
+                  <select class="form-control" id="manager_batch" name="manager_batch">
+                    <option value="">Select one Batch</option>
+                    {% for data in batchInfo %}
+                    <option value="{{data.id}}">batch_{{data.id}}</option>
+                    {% endfor %}
+                   
+                    
+                  </select>
+                </div>
+              </div><br/>
+              <button type="submit" class="btn btn-success" id="regMangBtn">Submit</button>
+            </form>
+            </div>
+        </div>
+      </div>
+
+      <div class="col-xs-3 col-sm-3">
+        <div class="row form-group" style="margin-top: 30px;">
+          <div class="col col-sm-3">
+            <label for="input-small" class="form-control-label">Date:</label>
+          </div>
+          <div class="col col-sm-9">
+            <!-- <input type="text" id="date-part" name="" class="stat-heading form-control"> -->
+            <div id="date-part" class="stat-heading"></div>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col col-sm-3">
+            <label for="input-small" class="form-control-label">Time:</label>
+          </div>
+          <div class="col col-sm-9">
+            <!-- <input type="text" id="time-part" name="" class="input-sm form-control-sm form-control"> -->
+            <div id="time-part" class="stat-heading"></div> 
+          </div>
+        </div>
+      </div>
+    </div><!-- row end -->
+
+  </div><!-- animated end -->
+</div><!-- Content end -->
+<div class="clearfix"></div>
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script src="{% static "dashCss/staticPagesJs/managerRegister.js" %}"></script>
+    
+{% endblock %}
+
+{% block extra_css %}
+{% endblock %}
+
+
+
+
+
+
+

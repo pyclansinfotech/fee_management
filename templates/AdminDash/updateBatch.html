@@ -1,0 +1,280 @@
+{% extends "AdminDash/AdminDashboard.html" %}
+{% load static %}
+
+{% block detail %}
+<!--  Traffic  -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">  
+           
+            <div class="row" style="margin-top: 20px;"> 
+                <div class="col-lg-3">
+                	<h4 class="text-center"><strong>Batch List </strong></h4>
+                    <div class="card-body">
+	                    <div class="card-content">
+	                    	<table id="batchTable" class="table table-striped table-bordered" style="width:100%">
+						        <thead>
+						        	<tr>
+						                <th class="text-center "> <b>Batch Id</b></th>  
+						            </tr>
+						        </thead>
+						        <tbody>
+						            {% for data in batchData %}
+						            <tr>	
+						            	<th><a href="/batchUpdated/{{data.id}}/" id="batchId" > batch_{{ data.id }} </a></th> 						       
+						            </tr>
+						            {% endfor %}   
+						        </tbody>
+							</table>
+	                    </div>
+                    </div> <!-- /.card-body -->
+                </div>
+
+                <div class="col-lg-6">
+                	<h4 class="text-center"><strong>Batch Detail</strong></h4>	
+                	<div class="card">
+                		<div class="card-body"> 
+	                       
+		                    <!-- <div class="card-content"> -->
+				   			<div class="alert alert-danger" id="dataAlert" style="display:none;">
+					            <div id="msgdataAlert"></div>
+					        </div>
+						
+						
+						{% if batchName is not defined %}
+							{% for data in batchName %}
+									
+							    <form id="update_batch" >
+								      <div class="card-body card-block">
+								      	<input type="hidden" id="batchid" name="batchid"  value="{{data.id}}" >
+								        <div class="row">
+								          <div class="col-sm-6 form-group">
+								            <label class="form-control-label">Day</label>
+								            <div id="datepickerBatch" class="input-group date" data-date-format="mm-dd-yyyy">
+								              <input type="text" class="form-control" value="{{data.day}}"  name="batch_day" id="batch_day" readonly/>
+								              <span class="input-group-addon"><i class="fa fa-calendar"></i>
+								              </span>
+								            </div>
+								          </div>
+								          <div class="col-md-6 form-group">
+								            <label>Time</label>
+								            <div class="form-group">
+								            <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
+								                <input type="text" id="batch_time" value="{{data.time}}" name="batch_time" class="form-control datetimepicker-input" data-target="#datetimepicker3"/>
+								                <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
+								                    <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
+								                </div>
+								            </div>
+								        </div>
+								          </div>
+								        </div>
+
+								        <div class="row">
+								            <div class="col-md-6 form-group">
+								              <label class="form-control-label">Center Type</label>
+								              <select class="form-control" id="batch_center" name="batch_center">
+								                <option value="{{data.center}}">{{data.center}}</option>
+								                <option value="Own centres">Own centres</option>
+								                <option value="Management centres">Management centres</option>
+								                <option value="Franchisee centres">Franchisee centres</option>
+								              </select>
+								             </div>
+
+								             <div class="col-md-6 form-group">
+							                  <label class="form-control-label">Center</label>
+							                  <select class="form-control" id="batch_center_name" name="batch_center_name">
+							                    <option value="{{data.centerName}}">{{data.centerName}}</option> 
+							                    {% for value in centerName %}                 
+							                    <option value="{{value.name}}">{{value.name}}</option>
+							                    {% endfor %}
+							                  </select>
+							                 </div>
+								            
+								          </div><br>
+
+								        <div class="row">
+								          <div class="col-md-4 form-group">
+								            <label for="" class="form-control-label">Batch Student</label>
+								            <input type="number" value="{{data.students}}" name="bat_student" id="bat_student" placeholder="" class="form-control">
+								          </div>
+								          <div class="col-md-4 form-group">
+								            <label for="" class="form-control-label">Batch Level</label>
+								            <input type="number" name="bat_level" value="{{data.levels}}"  id="bat_level" placeholder="" class="form-control">
+								          </div>
+								          <div class="col-md-4  form-group">
+								              <label for="" class="form-control-label">Room</label>
+								              <!-- <textarea name="bat_room" id="bat_room" rows="1"  class="form-control"></textarea> -->
+								              <input type="number" name="bat_room" value="{{data.room}}"  id="bat_room" placeholder="" class="form-control">
+								            </div>
+
+
+								        </div><br>
+
+								        <button type="submit" id="updateBatchBtn" class="btn btn-primary">Update</button>
+								      </div>
+								    </form>
+							<!-- </div> -->
+
+						    {% endfor %}
+
+							{% else %}
+								<div class="row">
+									<div class="col-md-12">
+										<h5 style="color: red">
+										   <i class="fa fa-hand-o-left"></i> Select batch id from batch list to update batch.
+										</h5>
+									</div>
+									
+								</div>
+						    
+						    {% endif %}	
+		               
+	                	</div> <!--card body -->
+                    </div><!-- card end -->
+
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalBatch">New</button>
+                    <!-- The Modal -->
+					  <div class="modal" id="myModalBatch">
+					    <div class="modal-dialog">
+					      <div class="modal-content">
+					      
+					        <!-- Modal Header -->
+					        <div class="modal-header" style="background-color: #5ba7fa;color:#fff;">
+					          <h4 class="modal-title"><strong>Create Batch</strong></h4>
+					          <button type="button" class="close" data-dismiss="modal">&times;</button>
+					        </div>
+					        
+					        <!-- Modal body -->
+					        <div class="modal-body">
+					        	<div class="alert alert-danger" id="dataAlertBatch" style="display:none;">
+					            <div id="msgBatchAlert"></div>
+					        </div>
+						
+
+					        	<form id="batch_form" >
+							      <div class="card-body card-block">
+							        <div class="row">
+							          <div class="col-sm-6 form-group">
+							            <label class="form-control-label">Day</label>
+							            <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+							              <input type="text" class="form-control" name="batch_day" id="batch_day" readonly/>
+							              <span class="input-group-addon"><i class="fa fa-calendar"></i>
+							              </span>
+							            </div>
+							          </div>
+							          <div class="col-md-6 form-group">
+							            <label>Time</label>
+							            <div class="form-group">
+							            <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
+							                <input type="text" id="batch_time" name="batch_time" class="form-control datetimepicker-input" data-target="#datetimepicker3"/>
+							                <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
+							                    <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
+							                </div>
+							            </div>
+							            </div>
+							          </div>
+							        </div>
+
+							        <div class="row">
+							            <div class="col-md-6 form-group">
+							              <label class="form-control-label">Center Type (select one):</label>
+							              <select class="form-control" id="batch_center" name="batch_center">
+							                <option value="">Select any one</option>
+							                <option value="Own centres">Own centres</option>
+							                <option value="Management centres">Management centres</option>
+							                <option value="Franchisee centres">Franchisee centres</option>
+							              </select>
+							             </div>
+
+							             <div class="col-md-6 form-group">
+							              <label class="form-control-label">Center</label>
+							              <select class="form-control" id="batch_center_name" name="batch_center_name">
+							                <option value="">Select any one</option> 
+							                {% for centerdata in centerName %}                 
+							                <option value="{{centerdata.name}}">{{centerdata.name}}</option>
+							                {% endfor %}
+							              </select>
+							             </div>
+							          </div>
+							            
+							        <div class="row">
+							          <div class="col-md-4 form-group">
+							            <label for="" class="form-control-label">Batch Student</label>
+							            <input type="number" name="bat_student" id="bat_student" placeholder="" class="form-control">
+							          </div>
+							          <div class="col-md-4 form-group">
+							            <label for="" class="form-control-label">Batch Level</label>
+							            <input type="number" name="bat_level" id="bat_level" placeholder="" class="form-control">
+							          </div>
+							          <div class="col-md-4  form-group">
+							              <label for="" class="form-control-label">Room</label>
+							              <!-- <textarea name="bat_room" id="bat_room" rows="1"  class="form-control"></textarea> -->
+							              <input type="number" name="bat_room" id="bat_room" placeholder="" class="form-control">
+							            </div>
+							        </div><br/>
+							        <button type="submit" id="batchBtn" class="btn btn-primary">Submit</button>
+							      </div>
+							    </form>
+					          <!-- Modal body.. -->
+					        </div>
+					        
+					        <!-- Modal footer -->
+					        <div class="modal-footer" style="background-color: #d5d9fa;">
+					          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					        </div>
+					        
+					      </div>
+					    </div>
+					  </div>
+
+                </div> <!--div 6 -->
+           
+
+                <div class="col-lg-3">
+                    <div class="card-body"> 
+                        <!-- <canvas id="TrafficChart"></canvas>   -->
+                        <!-- <div id="traffic-chart" class="traffic-chart"></div> -->
+                    </div>
+                </div>
+
+
+
+            </div> <!-- /.row end --> 
+        </div><!-- card end -->
+
+    </div><!-- /# column -->
+</div><!--  Traffic  End -->
+{% endblock detail %}
+
+
+{% block extra_js %}
+<script src="{% static 'dashCss/staticPagesJs/updateBatch.js' %}"></script> 
+<!-- <script type="text/javascript" src="../static/dashCss/staticPagesJs/datepicker.js"> -->
+<!-- </script> -->
+<script type="text/javascript" src="{% static 'dashCss/staticPagesJs/createBatch.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashCss/staticPagesJs/datepicker.js' %}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+
+
+{% endblock %}
+
+
+
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'dashCss/staticPagesCss/util.css' %}">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+        

@@ -1,0 +1,4 @@
+1. sudo pip install pymysql
+2. sudo pip install django=='2.0.7'
+3. sudo apt install python3.6
+4.
